@@ -1,0 +1,74 @@
+type Organization {
+  id: ID!
+  name: String!
+  nameUrl: String
+  description: String
+  lastFundingAmount: Float
+  activelyHiring: Boolean
+  operatingStatus: String
+  companyType: String
+  headquartersLocation: String
+  ipoStatus: String
+  contactJobDepartments: [String]
+  lastFundingType: String
+  growthCategory: String
+  industries: [String]
+  founders: [String]
+  contactEmail: String
+  numberOfEmployees: Int
+}
+
+type Query {
+  organization(id: ID!): Organization
+  allOrganizations: [Organization]
+  activelyHiringOrganizations(
+    industries: [String]
+    location: String
+    minEmployees: Int
+  ): [Organization]
+}
+
+input OrganizationInput {
+  name: String!
+  nameUrl: String
+  description: String
+  lastFundingAmount: Float
+  activelyHiring: Boolean
+  operatingStatus: String
+  companyType: String
+  headquartersLocation: String
+  ipoStatus: String
+  contactJobDepartments: [String]
+  lastFundingType: String
+  growthCategory: String
+  industries: [String]
+  founders: [String]
+  contactEmail: String
+  website: String
+  lastFundingAmount: Float
+  activelyHiring: Boolean
+  numberOfEmployees: Int
+}
+
+
+type JobDocument {
+  id: ID!
+  title: String!
+  documentUrl: String!
+  documentType: String!
+}
+
+input JobDocumentInput {
+  organizationId: ID!
+  title: String!
+  documentUrl: String!
+  documentType: String!
+}
+
+
+type Mutation {
+  createOrganization(input: OrganizationInput!): Organization
+  updateOrganization(id: ID!, input: OrganizationInput!): Organization
+  deleteOrganization(id: ID!): Boolean
+  addJobDocument(input: JobDocumentInput!): JobDocument
+}
