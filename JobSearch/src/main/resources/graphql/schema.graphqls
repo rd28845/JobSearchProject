@@ -26,6 +26,8 @@ type Query {
     location: String
     minEmployees: Int
   ): [Organization]
+  getCompanyAverageRating(companyId: ID!): Float
+  getCompanyReviews(companyId: ID!): [CompanyRating!]!
 }
 
 input OrganizationInput {
@@ -64,6 +66,21 @@ input JobDocumentInput {
   documentUrl: String!
   documentType: String!
 }
+input CompanyRatingInput {
+    companyId: ID!
+    userId: ID!
+    rating: Int!
+    comments: String
+}
+
+type CompanyRating {
+    id: ID!
+    companyId: ID!
+    userId: ID!
+    rating: Int!
+    comments: String
+}
+
 
 
 type Mutation {
@@ -71,4 +88,5 @@ type Mutation {
   updateOrganization(id: ID!, input: OrganizationInput!): Organization
   deleteOrganization(id: ID!): Boolean
   addJobDocument(input: JobDocumentInput!): JobDocument
+  submitCompanyRating(input: CompanyRatingInput!): CompanyRating!
 }
